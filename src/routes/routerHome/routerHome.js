@@ -1,19 +1,15 @@
+require('dotenv').config()
 const express = require("express");
 const auth = require("../../utils/middlewares/auth");
 const routerHome = express.Router();
-const session = require("express-session");
 
-routerHome.use(
-  session({
-    secret: "secreto",
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 3000 },
-  })
-);
 
 routerHome.get("/", auth, (req, res) => {
   const sessionData = req.session;
+  
+//  if(!req.session){
+//   console.log('sessios sin data home')
+//   return res.render("home.ejs", { sessionData })}
   res.render("home.ejs", { sessionData });
 });
 

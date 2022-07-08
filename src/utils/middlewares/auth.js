@@ -1,12 +1,12 @@
 function auth(req, res, next) {
-  console.log(req.session.cookie.maxAge);
   if (
-    req.session?.user == "valentin" &&
-    req.session?.usertype == "administrador"
+    req.session.user == "valentin" &&
+    req.session.usertype == "administrador"
   ) {
     return next();
   } else {
-    res.status(401).send("error de autenticacion");
+    console.log("Session Expirada");
+    res.redirect("/errorExpiredSession");
   }
 }
 module.exports = auth;

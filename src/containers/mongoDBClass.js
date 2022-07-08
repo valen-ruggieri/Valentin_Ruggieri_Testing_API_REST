@@ -32,7 +32,8 @@ class MongoDBClass {
   }
   async create(doc) {
     try {
-      await this.collection.create(doc);
+      const one = await this.collection.create(doc);
+      return one._id
     } catch (error) {
       throw new Error(error);
     }
@@ -44,13 +45,7 @@ class MongoDBClass {
       throw new Error(err);
     }
   }
-  async deleteByIdSession(id) {
-    try {
-      await this.collection.find({uIDSession:id}).deleteOne();
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+
   async deleteAll() {
     try {
       const all = await this.collection.deleteMany();

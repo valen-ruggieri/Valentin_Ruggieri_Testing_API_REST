@@ -1,20 +1,15 @@
+require("dotenv").config();
 const express = require("express");
 const routerLogIn = express.Router();
-const session = require("express-session");
 const { userDao } = require("../../DAOs/swicht");
+const cookieParser = require("cookie-parser");
 
-routerLogIn.use(
-  session({
-    secret: "secreto",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+routerLogIn.use(cookieParser("secret"));
+
 routerLogIn.get("/login", (req, res) => {
   req.session.user
     ? console.log("sesion ya existente")
     : console.log("logearse de nuevo");
-
   res.render("logIn.ejs");
 });
 
@@ -25,19 +20,15 @@ routerLogIn.post("/login", async (req, res) => {
   req.session.email = email;
   req.session.password = password;
   req.session.usertype = userType;
-  req.session.uID = 'dsfsad#@$#@DFSF32432sads';
-  const expiredSession = req.session.cookie._expires;
-  const timeMaxSession = req.session.cookie.originalMaxAge;
-  const uIDSession = req.session.uID;
-  await userDao.create({
-    uIDSession,
-    expiredSession,
-    timeMaxSession,
-    user: name,
-    email,
-    password,
-    userType,
+
+  const uID = await userDao.create({
+    user: req.session.user,
+    email: req.session.email,
+    password: req.session.password,
+    userType: req.session.usertype,
   });
+  req.session.uID = uID;
+  res.cookie("uID", uID, { signed: true });
   res.redirect("/");
 });
 
