@@ -24,6 +24,8 @@
     font-family: 'VT323', monospace;
     text-align: center;
     margin-top: 20px;
+    max-width: 800px;
+    margin-left: 20%;
     letter-spacing: 9px;
     color:#00ca8d;
     text-shadow: 2px 2px 2px #000000;
@@ -312,3 +314,60 @@ animation-iteration-count: 1;
   color:#2cf8ba;
  
 }
+
+
+/* redirects */
+
+
+.buttonGoToHome{
+  position: absolute;
+  top: 50%;
+  left: 25%;
+}
+.buttonGoToLogIn{
+  position: absolute;
+  top: 50%;
+  left:54%;
+}
+
+
+
+/* utils */
+
+.buttonStyle{
+  padding: 10px 70px;
+  background-color: transparent;
+   color:#00ca8d;
+   font-family: 'VT323', monospace;
+   border-radius: 40px;
+   font-weight: 700;
+   margin-top: 100px;
+   letter-spacing: 3px;
+   font-size: 20px;
+   text-transform: uppercase;
+   text-shadow: 2px 2px 2px #000000;
+   box-shadow: 2px 2px 2px #000000;
+   border-color: transparent;
+   background-color: #2e3539;
+}
+
+.buttonStyle:hover{
+ 
+  color: #ffffff;
+  box-shadow: 1px 1px 1px #000000;
+  text-shadow: 1px 1px 1px #000000;
+  transition: 0.4s;
+ 
+}
+.buttonStyle a{
+  color: #00ca8d;
+  text-decoration: none;
+}
+
+.buttonStyle a:hover{
+ 
+  text-shadow: 1px 1px 1px #000000;
+  color:#2cf8ba;
+ 
+}
+

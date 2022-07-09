@@ -2,12 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
-const routerError = require("./routes/routerError/routerError");
 const routerHome = require("./routes/routerHome/routerHome");
+const routerError = require("./routes/routerError/routerError");
+const routerSignIn = require("./routes/routerSignIn/routerSignIn");
+const routerStore = require("./routes/routerStore/routerStore");
 const routerLogIn = require("./routes/routerLogin/routerLogIn");
 const routerLogOut = require("./routes/routerLogOut/routerLogOut");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+
+
 
 app.use(
   session({
@@ -17,6 +21,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: process.env.URI,
       ttl: 10,
+      autoRemove: 'interval'
     }),
   })
 );
@@ -27,7 +32,9 @@ app.use(express.json());
 app.set("views", path.join(__dirname + "/public/views"));
 app.set("view engine", "ejs");
 app.use("/", routerHome);
+app.use("/", routerStore);
 app.use("/", routerLogIn);
+app.use("/", routerSignIn);
 app.use("/", routerLogOut);
 app.use("/", routerError);
 

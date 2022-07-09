@@ -22,6 +22,16 @@ class MongoDBClass {
     }
   }
 
+  async getByUser(data){
+    try {
+      const one = await this.collection.find({email:data.email}).lean();
+      console.log(one[0])
+      return one[0];
+    } catch (error) {
+      throw new Error(err);
+    }
+  }
+
   async countAll() {
     try {
       const all = await this.collection.find().count();
@@ -42,7 +52,7 @@ class MongoDBClass {
     try {
       const one = await this.collection.findById(id).deleteOne();
     } catch (error) {
-      throw new Error(err);
+      throw new Error(error);
     }
   }
 
