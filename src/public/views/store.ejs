@@ -12,16 +12,42 @@
   />
   <link rel="stylesheet" href="../styles.css" />
     <title>Store</title>
-    <% if (sessionData ) { %>
-      <%- include('../partials/navBarUser.ejs') %> 
    
-   
-<% } else { %>
 
-  <%- include('../partials/messageLogOut.ejs') %> 
-  <% } %>
+   
+
 </head>
 <body id="bodyHome" >
-    
+  <% if (sessionData ) { %>
+    <div >
+      <h1 id="titleShopClient"  >SHOP</h1>
+      <span class="hrShop"></span>
+        </div>
+    <%- include('../partials/navBarUser.ejs') %> 
+      <div class="d-flex flex-row row ms-2 mb-5 ">
+      <% productos.forEach((producto ,key) => { %> 
+          <div class="card  m-5 cardProduct" style="width: 15rem;">
+            <img src="<%= producto.img %>" class=" cardImage"  width="150px" height="150px" alt="<%= producto.img %>" >
+              <div class="card-body   ">
+                <a  class="aLinkToProduct "href="/api/productos/producto/<%= producto._id %>"><h5 class="card-title "><%= producto.titulo %></h5></a>
+                <p class="  cardDescrption"><small ><%= producto.descripcion %></small></p>
+               <div class="contentPriceAndCode">
+                <p class="  cardPrice">$<%= producto.precio %> </p>
+                <p class=" cardCode">ID : <%= producto.codigo %></p>
+               
+               </div>
+                <a href="/api/carrito/add/<%= producto._id  %> " class="buttonAddToCart ">ADD TO CAR</a>
+              </div>
+            </div>
+           
+       <% }) %> 
+            
+          </div>
+  
+  <% }else{  %> 
+    <div class=" ms-2 mb-5 ">
+      <h1 class="  text-dark dontProductText text-opacity-10">There are no products</h1>
+    </div>
+  <% } %> 
 </body>
 </html>

@@ -21,8 +21,9 @@
   <body id="bodyFormUser">
     <!-- Button trigger modal -->
     <h1 class="" id="titleUser">SIGN IN</h1>
-    <h2 id="subTitleUser" class="text-align-center"><%= message %> </h2>
+    
     <% if (error == false) { %>
+      <h2 id="subTitleUser" class="text-align-center"><%= message %> </h2>
       <div class="position-absolute top-50 start-50 translate-middle">
         <button
           type="button"
@@ -30,11 +31,11 @@
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
-          Sign in
+          Iniciar Sesion
         </button>
       </div>
     <% }else{ %>
-
+      <h2 id="subTitleUserError" class="text-align-center"><%= message %> </h2>
       <div class="buttonGoToLogIn">
         <a href="/login" >
         <button
@@ -42,7 +43,7 @@
           class="buttonStyle"
          
         >
-          go to log in
+          Registrarse
         
           
         </button>
@@ -55,7 +56,7 @@
           class="buttonStyle"
           
         >
-           go to home
+          Volver a home
        
          
         </button> 
@@ -66,7 +67,7 @@
 
     <!-- Modal -->
     <div
-      class="modal fade"
+      class="modal fade mt-5"
       id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
@@ -75,7 +76,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header mt-2">
-            <h4 class="modal-title" id="exampleModalLabel">USER REGISTER</h4>
+            <h4 class="modal-title-signin " id="exampleModalLabel">USER SIGN IN</h4>
             <button
               type="button"
               class="me-3"

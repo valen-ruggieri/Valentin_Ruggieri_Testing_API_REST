@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 routerSignIn.use(cookieParser("secret"));
 
 routerSignIn.get("/signin", (req, res) => {
-  res.render("signIn.ejs",{message:'Welcome! you can Sign in here', error:false});
+  res.render("signIn.ejs",{message:'Puedes iniciar sesión aquí', error:false});
 });
 
 routerSignIn.post("/signin", async (req, res) => {
@@ -27,7 +27,7 @@ routerSignIn.post("/signin", async (req, res) => {
 
   }else{
   
-    return  res.render("signIn.ejs",{message:'el usuario que buscas no existe, prueba registrandote',error:true});
+    return  res.render("signIn.ejs",{message:'El usuario que intentas ingresar no existe, prueba registrandote', error:true});
   }
   
 });

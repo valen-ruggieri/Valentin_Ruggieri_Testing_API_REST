@@ -3,16 +3,21 @@ const express = require("express");
 const routerLogIn = express.Router();
 const { userDao } = require("../../DAOs/swicht");
 const cookieParser = require("cookie-parser");
+const userValidation = require("../../utils/middlewares/authValidation");
+const userschemaValidation = require("../../models/userSchemaValidation");
+
+
+
 routerLogIn.use(cookieParser("secret"));
 
 routerLogIn.get("/login", (req, res) => {
   req.session.user
     ? console.log("sesion ya existente")
     : console.log("logearse de nuevo");
-  res.render("logIn.ejs",{message:'Welcome! you can register here',error:false});
+  res.render("logIn.ejs",{message:'Puedes registrarte aquí',error:false});
 });
 
-routerLogIn.post("/login", async (req, res) => {
+routerLogIn.post("/login",userValidation(userschemaValidation), async (req, res) => {
   const { name, email, password, userType } = req.body;
   const existUser = await userDao.getByUser({ email, password })
   if(!existUser){
@@ -32,7 +37,7 @@ routerLogIn.post("/login", async (req, res) => {
   }
   else{
 
-    res.render("logIn.ejs",{message:'ese usuario ya esta registrado, prueba con otro',error:true});
+    res.render("logIn.ejs",{message:'Ese usuario ya esta registrado, prueba con otro',error:true});
 
   }
   

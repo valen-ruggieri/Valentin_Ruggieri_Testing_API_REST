@@ -25,7 +25,7 @@ class MongoDBClass {
   async getByUser(data){
     try {
       const one = await this.collection.find({email:data.email}).lean();
-      console.log(one[0])
+     
       return one[0];
     } catch (error) {
       throw new Error(err);
