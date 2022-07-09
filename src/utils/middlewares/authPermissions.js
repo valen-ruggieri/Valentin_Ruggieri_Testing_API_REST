@@ -1,6 +1,5 @@
 
 function authPermissions(req, res, next) {
-
   if (
     req.signedCookies.uID &&
     req.session.user  &&
@@ -8,7 +7,6 @@ function authPermissions(req, res, next) {
   ) {
     return next();
   } else {
-    console.log("Session Expirada");
     res.redirect("/errorExpiredSession");
   }
 }

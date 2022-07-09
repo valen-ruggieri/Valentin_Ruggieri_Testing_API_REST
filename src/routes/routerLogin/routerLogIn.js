@@ -6,14 +6,9 @@ const cookieParser = require("cookie-parser");
 const userValidation = require("../../utils/middlewares/authValidation");
 const userschemaValidation = require("../../models/userSchemaValidation");
 
-
-
 routerLogIn.use(cookieParser("secret"));
 
 routerLogIn.get("/login", (req, res) => {
-  req.session.user
-    ? console.log("sesion ya existente")
-    : console.log("logearse de nuevo");
   res.render("logIn.ejs",{message:'Puedes registrarte aquí',error:false});
 });
 
@@ -35,16 +30,7 @@ routerLogIn.post("/login",userValidation(userschemaValidation), async (req, res)
     res.cookie("uID", uID, { signed: true });
     return res.redirect("/store");
   }
-  else{
-
-    res.render("logIn.ejs",{message:'Ese usuario ya esta registrado, prueba con otro',error:true});
-
-  }
-  
-
-
-  
-  
+  else{res.render("logIn.ejs",{message:'Ese usuario ya esta registrado, prueba con otro',error:true})}
 });
 
 module.exports = routerLogIn;

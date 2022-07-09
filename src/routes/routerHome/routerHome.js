@@ -6,5 +6,4 @@ routerHome.get("/", (req, res) => {
   res.render("home.ejs");
 });
 
-
 module.exports = routerHome;

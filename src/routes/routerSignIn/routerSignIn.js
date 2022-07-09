@@ -21,14 +21,10 @@ routerSignIn.post("/signin", async (req, res) => {
     req.session.password = password;
     req.session.usertype = userType;
     req.session.uID = req.signedCookies.uID
-  
     return res.redirect("/store");
-
-
   }else{
-  
     return  res.render("signIn.ejs",{message:'El usuario que intentas ingresar no existe, prueba registrandote', error:true});
-  }
+}
   
 });
 
