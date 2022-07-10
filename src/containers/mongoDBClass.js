@@ -43,7 +43,7 @@ class MongoDBClass {
   async create(doc) {
     try {
       const one = await this.collection.create(doc);
-      return one._id
+      return one
     } catch (error) {
       throw new Error(error);
     }

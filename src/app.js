@@ -10,7 +10,7 @@ const routerLogIn = require("./routes/routerLogin/routerLogIn");
 const routerLogOut = require("./routes/routerLogOut/routerLogOut");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
+const passport = require('passport')
 
 
 app.use(
@@ -25,6 +25,10 @@ app.use(
     }),
   })
 );
+
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(express.static(path.join(__dirname + "/public")));
 app.use(express.urlencoded({ extended: true }));
