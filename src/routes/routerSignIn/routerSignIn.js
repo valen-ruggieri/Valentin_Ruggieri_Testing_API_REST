@@ -1,44 +1,31 @@
 require("dotenv").config();
 const express = require("express");
 const routerSignIn = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
-routerSignIn.get("/signin", (req, res) => {
-  res.render("signIn.ejs",{message:'Puedes iniciar sesión aquí', error:false});
+routerSignIn.get("/signinerror", (req, res) => {
+  res.render("signIn.ejs", {
+    message: "el usuario que buscas no existe, prueba registrandote",
+    error: true,
+  });
 });
 
-routerSignIn.post("/signin", passport.authenticate('signIn',{
-  successRedirect:'/',
-  successMessage:'registro exitoso',
-  failureRedirect:'/login',
-  failureMessage:'fallo en el registro',
-  passReqToCallback:true
-  }))
+routerSignIn.get("/signin", (req, res) => {
+  res.render("signIn.ejs", {
+    message: "Puedes iniciar sesión aquí",
+    error: false,
+  });
+});
 
-
-
-// routerSignIn.use(cookieParser("secret"));
-
-// routerSignIn.get("/signin", (req, res) => {
-//   res.render("signIn.ejs",{message:'Puedes iniciar sesión aquí', error:false});
-// });
-
-// routerSignIn.post("/signin", async (req, res) => {
-//   const { email, password } = req.body;
-//   const userData = await userDao.getByUser({ email, password })
-
-//   if (userData && req.signedCookies.uID) {
-//     const { user, userType, id } = userData;
-//     req.session.user = user;
-//     req.session.email = email;
-//     req.session.password = password;
-//     req.session.usertype = userType;
-//     req.session.uID = req.signedCookies.uID
-//     return res.redirect("/store");
-//   }else{
-//     return  res.render("signIn.ejs",{message:'El usuario que intentas ingresar no existe, prueba registrandote', error:true});
-// }
-  
-// });
+routerSignIn.post(
+  "/signin",
+  passport.authenticate("signIn", {
+    successRedirect: "/store",
+    successMessage: "registro exitoso",
+    failureRedirect: "/signinerror",
+    failureMessage: "fallo en el inicio de sesion",
+    passReqToCallback: true,
+  })
+);
 
 module.exports = routerSignIn;

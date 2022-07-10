@@ -9,9 +9,6 @@ const usersSchema = new Schema({
   userType: { type: String, required: true },
 });
 
-usersSchema.methods.call = ()=>{
-  console.log('metodo de call listo')
-}
 
 
 module.exports = usersSchema;

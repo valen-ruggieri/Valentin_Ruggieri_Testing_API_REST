@@ -2,6 +2,7 @@
 require("dotenv").config();
 
 let userDao;
+let sessionDao;
 
 switch (process.env.DB_CONNECTION) {
   case "mongoDB":
@@ -10,6 +11,9 @@ switch (process.env.DB_CONNECTION) {
 
     const MongoDBUser = require("./users/MongoDBUserSessions");
     userDao = new MongoDBUser();
+
+    const MongoDBSession= require("./sessions/mongoDBSessions");
+    sessionDao = new MongoDBSession();
 
     break;
   case "firebase":
@@ -26,4 +30,4 @@ switch (process.env.DB_CONNECTION) {
     throw new Error("No se ha definido una conexión a la base de datos");
 }
 
-module.exports = {  userDao };
+module.exports = {  userDao , sessionDao};

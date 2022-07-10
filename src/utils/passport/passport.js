@@ -1,6 +1,5 @@
 const passport = require("passport");
 const { userDao } = require("../../DAOs/swicht");
-const MongoDBUser = require("../../DAOs/users/MongoDBUserSessions");
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.serializeUser((user, done) => {
@@ -21,22 +20,22 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
-      const { name, userType } = req.body;
+      const exists = await userDao.getByUser({ email });
 
-      console.log(name, userType, email, password);
-      req.session.user = name;
-      req.session.email = email;
-      req.session.password = userDao.encryptPassword(password);
-      req.session.usertype = userType;
+      if (!exists) {
+        const { name, userType } = req.body;
+        const userSignIn = await userDao.create({
+          user: name,
+          email: email,
+          password: userDao.encryptPassword(password),
+          userType: userType,
+        });
 
-      const userSignIn = await userDao.create({
-        user: req.session.user,
-        email: req.session.email,
-        password: req.session.password,
-        userType: req.session.usertype,
-      });
-
-      done(null, userSignIn);
+        return done(null, userSignIn);
+      }
+      if (exists) {
+        return done(null, false);
+      }
     }
   )
 );
@@ -51,16 +50,13 @@ passport.use(
     },
     async (req, email, password, done) => {
       const user = await userDao.getByUser({ email });
-      if(!user){
-        console.log("no existe el usuario");
-        return done(null,false)
+      if (!user) {
+        return done(null, false);
       }
-      if (!await userDao.comparePassword(password, user.password)) {
-         console.log("la contrasena es incorrecta");
-        return done(null,false)
+      if (!(await userDao.comparePassword(password, user.password))) {
+        return done(null, false);
       }
 
-      console.log("inicio sesion correctamente");
       done(null, user);
     }
   )

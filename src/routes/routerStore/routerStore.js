@@ -2,14 +2,15 @@ require('dotenv').config()
 const express = require("express");
 const authPermissions = require('../../utils/middlewares/authPermissions');
 const routerStore = express.Router();
-const {faker} =require('@faker-js/faker')
-const cookieParser = require("cookie-parser");
+const {faker} =require('@faker-js/faker');
+const { userDao } = require('../../DAOs/swicht');
 
 
-routerStore.use(cookieParser("secret"));
 
-routerStore.get("/store", authPermissions, (req, res) => {
-  const sessionData = req.session;
+routerStore.get("/store", authPermissions, async(req, res) => {
+
+const sessionData = await userDao.getById(req.session.passport.user)
+
   const productos = [];
   for (let i = 0; i < 8; i++) {
     const randomProduct = faker.commerce.productName();
@@ -25,7 +26,7 @@ routerStore.get("/store", authPermissions, (req, res) => {
       codigo: randomCode,
     })}
    
-  res.render("store.ejs", { sessionData , productos});
+  res.render("store.ejs", { sessionData, productos});
 });
 
 module.exports = routerStore;

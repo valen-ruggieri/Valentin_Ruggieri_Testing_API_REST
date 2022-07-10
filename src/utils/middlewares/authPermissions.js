@@ -1,10 +1,8 @@
 
 function authPermissions(req, res, next) {
+  
   if (
-    req.signedCookies.uID &&
-    req.session.user  &&
-    req.session.usertype
-  ) {
+    req.isAuthenticated()) {
     return next();
   } else {
     res.redirect("/errorExpiredSession");

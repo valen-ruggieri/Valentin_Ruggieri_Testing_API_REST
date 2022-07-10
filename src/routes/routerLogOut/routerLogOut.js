@@ -1,26 +1,37 @@
 const express = require("express");
 const routerLogOut = express.Router();
-const { userDao } = require("../../DAOs/swicht");
-const cookieParser = require("cookie-parser");
-
-routerLogOut.use(cookieParser("secret"));
+const { userDao, sessionDao } = require("../../DAOs/swicht");
 
 routerLogOut.get("/logout", async (req, res) => {
+ setTimeout(async()=>{
+ await sessionDao.deleteAll()
+  .then(()=>{
+    console.log('las sesiones fueron eliminadas correctamente')
+  })
+  .catch(err=>{
+    console.log('No se pudieron eliminar las sesiones '+err)
+  })
   res.redirect("/");
+ },800)
 });
 
 routerLogOut.get("/deleteuser", async (req, res) => {
-  const uID = req.signedCookies.uID;
-  res.clearCookie("uID"); 
+  await sessionDao.deleteAll()
+  .then(()=>{
+    console.log('las sesiones fueron eliminadas correctamente')
+  })
+  .catch(err=>{
+    console.log('No se pudieron eliminar las sesiones '+err)
+  })
   await userDao
-    .deleteById(uID)
+    .deleteById( req.session.passport.user)
     .then(() => {
       res.redirect("/");
     })
     .catch((err) => {
       console.log("no se pudo eliminar la cuenta" + err);
     });
-  req.session = " ";
+  
 });
 
 module.exports = routerLogOut;
