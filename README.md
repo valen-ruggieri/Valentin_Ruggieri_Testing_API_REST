@@ -1,10 +1,11 @@
-# Valentin_Ruggieri_Cookies_And_Session
+# Valentin_Ruggieri_Authorization_And_Authentication
+
 ## Funcionamiento
 
-![Video de funcionamiento de la App](https://media.giphy.com/media/j7pNIroXSxt4MO8qFa/giphy.gif)
+![Video de funcionamiento de la App]()
 
 ## Inicio
-En este desafio realizaremos un formulario con el cual nos registraremos o iniciaremos sesion en una tienda utilizando cookies y sessions de mongo
+
 
 ## Formularios
 
