@@ -2,7 +2,7 @@
 
 ## Funcionamiento
 
-![Video de funcionamiento de la App]()
+![Video de funcionamiento de la App](https://media.giphy.com/media/EA5gWo2cq9cOybAz5H/giphy.gif)
 
 ## Inicio
 
