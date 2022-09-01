@@ -26,6 +26,7 @@ routerLogIn.post(
     failureMessage: "fallo en el registro",
     passReqToCallback: true,
   })
+  
 );
 
 routerLogIn.post(
