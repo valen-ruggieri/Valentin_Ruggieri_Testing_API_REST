@@ -1,8 +1,8 @@
-# Valentin_Ruggieri_Authorization_And_Authentication
+# Valentin_Ruggieri_Proyecto_Final_3
 
 ## Funcionamiento
 
-![Video de funcionamiento de la App](https://media.giphy.com/media/EA5gWo2cq9cOybAz5H/giphy.gif)
+![Video de funcionamiento de la App]()
 
 ## Inicio
 En este desaio partiremos del anterior desafio basico de inicio y registro de sesiones para poder migrar a otra herramienta la cual sera passport que mediante sus funcionalidades, junto con el encriptaminento de las claves, nos daran una aplicacion web mas segura.
