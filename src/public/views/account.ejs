@@ -20,16 +20,20 @@
     <span class="hrShop"></span>
       </div>
   <%- include('../partials/navBarUser.ejs') %> 
-  <image src="../images/<%=   account.image %> "width='150' height="150"/>
-<h1>User: <%= account.user %> </h1>
-<h2>Email: <%= account.email %> </h2>
-<h2>User Type: <%= account.userType %> </h2>
-<h2>Address: <%= account.address %> </h2>
-<h2>Age: <%= account.age %> </h2>
-<h2>Phone: <%= account.phone %> </h2>
+ 
+  <div class="labelProfile">
+  <div class="profile"> 
+   
+  <image class="img" src="../images/<%=   account.image %> "width='130' height="130"/>
+<h1 class="text">User: <%= account.user %> </h1>
+<h2 class="text">Email: <%= account.email %> </h2>
+<h2 class="text">User Type: <%= account.userType %> </h2>
+<h2 class="text">Address: <%= account.address %> </h2>
+<h2 class="text">Age: <%= account.age %> </h2>
+<h2 class="text">Phone: <%= account.phone %> </h2>
+</div>
 
-
-
+</div>
     
 </body>
 </html>

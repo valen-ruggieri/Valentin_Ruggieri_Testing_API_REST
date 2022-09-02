@@ -70,6 +70,15 @@ class MongoDBClass {
       throw new Error(err);
     }
   }
+  async getByEmail(data){
+    try {
+      const one = await this.collection.find({email:data}).lean();
+     
+      return one[0];
+    } catch (error) {
+      throw new Error(err);
+    }
+  }
 }
 
 module.exports = MongoDBClass;

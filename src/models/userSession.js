@@ -10,6 +10,7 @@ const usersSchema = new Schema({
   age: { type: String, required: true },
   phone: { type: String, unique: true, required: true },
   image: { type: String, required: true },
+  cartId:{type:String,unique: true, required: true}
 });
 
 module.exports = usersSchema;
