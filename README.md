@@ -1,5 +1,9 @@
 # Valentin_Ruggieri_Proyecto_Final_3
 
+## Deploy
+
+https://shopbasic.herokuapp.com/
+
 ## Funcionamiento
 
 ![Video de funcionamiento de la App]()
@@ -20,14 +24,18 @@ En este desaio partiremos del anterior desafio basico de inicio y registro de se
 - Si la sesion expira esta misma devolvera al home por lo que la unica forma de poder volver a ingresar es mediante el inicio de sesion
 
 ## Tienda
-La tienda no tendra funcionalidad por que no es el objetivo del desafio, pero constara de una navbar con la cual tendremos interaccion
+Dentro de la tienda tendremos las opciones:
+- Como administrador de agregar, eliminar o editar productos
+- Como cliente de agregar productos al carrito, eliminarlos y finalizar la compra
+
 ### Navbar de tienda
-La navbar tendra la informacion del usuario creado y tambien dos botones de redireccionamiento:
+La navbar tendra los botones de redireccionamiento:
 #### Boton de log out
 Redireccionara a una ruta la cual borrara los datos del usuario que se encuentran en la session excepto la cookie que servira como enlace para volver a iniciar la secion mediante el vinculo de ella con el usuario.
 #### Boton de eliminar usuario
 Redireccionara a una ruta la cual eliminara el usuario de la base de datos como asi tambien la sesion
-
+#### Boton de Account
+Redireccionara a la cuenta del perfil con su informacion
 
 ## Validaciones
 - Mediante yup y un middleware vamos a tener la validacion de los datos que ingresemos en el formularion antes de que nos redireccione a la tienda
@@ -36,18 +44,6 @@ Redireccionara a una ruta la cual eliminara el usuario de la base de datos como 
 - Mediante passport manejaremos los inicios y registros del usuario brinndando una serie de condiconales que permitira evitar errores a la hora de utilizar la app web
 - Utilizando bcrypt podremos enviar una contrasena encriptada hacia la base de datos cuando se registra un usuario, de esta manera aumentado la seguridad y minimizando los riesgos, las clave encriptadas luego mediante metodos sera comparada a la hora de iniciar sesion para poder evaluar si pertenece al usuario anteriormente registrado
 
- ## Herraminetas y su uso en la app
- 
-  - Css y Bootstrap para poder realizar el maquetado, diseno y animaciones de nuestro proyecto
-  - Mongoose para las consultas con la base de datos MongoDB atlas
-  - Faker js para poder generar un mock de productos aleatorios
-  - Connect-mongo para crear la session del usuario
-  - Yup para el esquemna de validaciones del formulario
-  - Dotenv para poder utilizar las claves guardadas en .env
-  - Passport para manejar los inicios y registro de sesiones
-  - Bcrypt para poder encriptar las contrasenas del usuario
-  
- 
 
 ## Tecnologías
 - Node Js
@@ -55,10 +51,16 @@ Redireccionara a una ruta la cual eliminara el usuario de la base de datos como 
 - EJS
 - Bootstrap
 - Css
-- Faker js
 - Mongoose
 - MongoDB Atlas
 - Connect-mongo
 - Yup
 - Passport-local
 - Bcrypt
+- Artillery
+- Log4s
+- Cluster
+- Heroku
+- Twilio
+- Nodemailer
+
