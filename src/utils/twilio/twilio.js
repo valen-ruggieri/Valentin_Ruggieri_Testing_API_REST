@@ -1,9 +1,11 @@
 require("dotenv").config();
 const twilio = require("twilio");
+const logger = require("../loggers/loggers");
 const twilioAccount = twilio(
   `${process.env.TWILIO_SID}`,
   `${process.env.TWILIO_TOKEN}`
 );
+
 
 const sendToWsp = async (querysnapshot,precioTotal,user,phone) => {
   const listWsp = querysnapshot.map(
@@ -33,7 +35,7 @@ const sendToWsp = async (querysnapshot,precioTotal,user,phone) => {
       from: "whatsapp:+14155238886",
       to: `whatsapp:+549${phone}`,
     })
-    .then(() => console.log("enviado"))
-    .catch((err) => console.log(err));
+    .then(() => logger.info("enviado"))
+    .catch((err) => logger.warn(err));
 };
 module.exports = sendToWsp;

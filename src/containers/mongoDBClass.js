@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const logger = require("../utils/loggers/loggers");
 
 class MongoDBClass {
   constructor(collectionName, docSchema) {
@@ -9,7 +10,7 @@ class MongoDBClass {
       const all = await this.collection.find().lean();
       return all;
     } catch (error) {
-      throw new Error(err);
+      logger.error(err);
     }
   }
 
@@ -18,7 +19,7 @@ class MongoDBClass {
       const one = await this.collection.findById(id).lean();
       return one;
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
 
@@ -28,7 +29,7 @@ class MongoDBClass {
      
       return one[0];
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
 
@@ -37,7 +38,7 @@ class MongoDBClass {
       const all = await this.collection.find().count();
       return all;
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
   async create(doc) {
@@ -60,14 +61,14 @@ class MongoDBClass {
     try {
       const all = await this.collection.deleteMany();
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
   async updateById(id, doc) {
     try {
       const one = await this.collection.findByIdAndUpdate(id, doc);
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
   async getByEmail(data){
@@ -76,7 +77,7 @@ class MongoDBClass {
      
       return one[0];
     } catch (error) {
-      throw new Error(err);
+       logger.error(err);
     }
   }
 }

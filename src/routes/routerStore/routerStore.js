@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const authPermissions = require("../../utils/middlewares/authPermissions");
 const routerStore = express.Router();
-const { faker } = require("@faker-js/faker");
 const { userDao, productsDao } = require("../../DAOs/swicht");
 
 routerStore.get("/store", authPermissions, async (req, res) => {

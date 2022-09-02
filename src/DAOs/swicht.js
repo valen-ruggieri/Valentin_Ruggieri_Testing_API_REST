@@ -1,3 +1,5 @@
+const logger = require("../utils/loggers/loggers");
+
 require("dotenv").config();
 
 let userDao;
@@ -7,8 +9,7 @@ let cartsDao;
 
 switch (process.env.DB_CONNECTION) {
   case "mongoDB":
-    console.log("mongoDB active");
-
+    logger.info("mongoDB active");
     const MongoDBUser = require("./users/MongoDBUserSessions");
     userDao = new MongoDBUser();
 
@@ -23,11 +24,11 @@ switch (process.env.DB_CONNECTION) {
 
     break;
   case "firebase":
-    console.log("firebaseDB active");
+    logger.info("firebaseDB active");
 
     break;
   case "SQL":
-    console.log("SQL active");
+    logger.info("SQL active");
 
     break;
   default:

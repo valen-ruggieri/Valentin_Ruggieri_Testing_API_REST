@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const logger = require("../utils/loggers/loggers");
+
 require("dotenv").config();
 mongoose
   .connect(process.env.URI)
   .then(() => {
-    console.log("conectado con exito a mongoDB");
+   logger.info("Conectado con exito a mongoDB 🍃");
   })
   .catch((err) => {
     consople.log(err);

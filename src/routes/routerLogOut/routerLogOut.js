@@ -1,16 +1,17 @@
 const express = require("express");
 const routerLogOut = express.Router();
 const { userDao, sessionDao } = require("../../DAOs/swicht");
+const logger = require("../../utils/loggers/loggers");
 
 routerLogOut.get("/logout", async (req, res) => {
   setTimeout(async () => {
     await sessionDao
       .deleteAll()
       .then(() => {
-        console.log("las sesiones fueron eliminadas correctamente");
+        logger.info("las sesiones fueron eliminadas correctamente");
       })
       .catch((err) => {
-        console.log("No se pudieron eliminar las sesiones " + err);
+        logger.info("No se pudieron eliminar las sesiones " + err);
       });
     res.redirect("/");
   }, 800);
@@ -23,15 +24,15 @@ routerLogOut.get("/deleteuser", async (req, res) => {
       res.redirect("/");
     })
     .catch((err) => {
-      console.log("no se pudo eliminar la cuenta" + err);
+      logger.info("no se pudo eliminar la cuenta" + err);
     });
   await sessionDao
     .deleteAll()
     .then(() => {
-      console.log("las sesiones fueron eliminadas correctamente");
+      logger.info("las sesiones fueron eliminadas correctamente");
     })
     .catch((err) => {
-      console.log("No se pudieron eliminar las sesiones " + err);
+      logger.info("No se pudieron eliminar las sesiones " + err);
     });
 });
 
