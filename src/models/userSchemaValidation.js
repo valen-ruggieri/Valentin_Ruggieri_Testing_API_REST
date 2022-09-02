@@ -26,7 +26,7 @@ const userschemaValidation = yup.object({
     .required(),
   phone: yup
     .string()
-    .max(10, "Debe ser un numero de telefono valido")
+    .max(18, "Debe ser un numero de telefono valido")
     .required(),
 });
 

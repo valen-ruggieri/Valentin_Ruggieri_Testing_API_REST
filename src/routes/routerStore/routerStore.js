@@ -3,6 +3,7 @@ const express = require("express");
 const authPermissions = require("../../utils/middlewares/authPermissions");
 const routerStore = express.Router();
 const { userDao, productsDao } = require("../../DAOs/swicht");
+const validationProduct = require("../../utils/middlewares/validationProducts");
 
 routerStore.get("/store", authPermissions, async (req, res) => {
   const sessionData = await userDao.getById(req.session.passport.user);
@@ -22,7 +23,7 @@ routerStore.get("/store/addproduct", authPermissions, async (req, res) => {
   res.render("formAddProducts.ejs");
 });
 
-routerStore.post("/store/addproduct", authPermissions, async (req, res) => {
+routerStore.post("/store/addproduct", authPermissions,validationProduct('add'), async (req, res) => {
   const { titulo, precio, descripcion, codigo } = req.body;
   const img = req.file.filename;
   const precioFormat = Number(precio);
@@ -45,6 +46,7 @@ routerStore.post("/store/addproduct", authPermissions, async (req, res) => {
 routerStore.post(
   "/store/updateproduct/:id",
   authPermissions,
+  validationProduct('update'),
   async (req, res) => {
     const id = req.params.id;
     const { titulo, precio, descripcion, codigo } = req.body;

@@ -7,7 +7,7 @@ const userValidation = (schema) => async (req, res, next) => {
   } catch (error) {
     logger.error(error)
     return res.render("login.ejs", {
-      message: ` ${error.errors}`,
+      message: ` ${error.message}`,
       error: true,
     });
   }
