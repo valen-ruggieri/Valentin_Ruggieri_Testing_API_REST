@@ -8,5 +8,5 @@ mongoose
    logger.info("Conectado con exito a mongoDB 🍃");
   })
   .catch((err) => {
-    consople.log(err);
+    logger.info(err);
   });
