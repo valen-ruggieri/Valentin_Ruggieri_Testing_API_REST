@@ -6,7 +6,17 @@ https://shopbasic.herokuapp.com/
 
 
 ## Inicio
-En este desaio partiremos del anterior desafio basico de inicio y registro de sesiones para poder migrar a otra herramienta la cual sera passport que mediante sus funcionalidades, junto con el encriptaminento de las claves, nos daran una aplicacion web mas segura.
+En este desaio realizaremos la tercer entrega del proyecto final en el cual tendremos registros mediante passport, mensajeria con nodemailer y twilio, 
+profiling con artillery, loggers con log4js, activacion de cluster y deploy en heroku.
+Ademas tambien conjunto al desafio de arquitectura por capas el cual sera realizado en este mismo, refactorizaremos todo el codigo y dividiremos en capas
+para mejorar el entendimiento del mismo y cada parte funcional.
+
+## Arquitectura por capas
+- Database
+- Controllers
+- Services
+- Routes
+- Server
 
 ## Formularios
 
@@ -41,13 +51,6 @@ Redireccionara a la cuenta del perfil con su informacion
 - Mediante passport manejaremos los inicios y registros del usuario brinndando una serie de condiconales que permitira evitar errores a la hora de utilizar la app web
 - Utilizando bcrypt podremos enviar una contrasena encriptada hacia la base de datos cuando se registra un usuario, de esta manera aumentado la seguridad y minimizando los riesgos, las clave encriptadas luego mediante metodos sera comparada a la hora de iniciar sesion para poder evaluar si pertenece al usuario anteriormente registrado
 
-
-## Arquitectura pot capas
-### Database
-### Controllers
-### Services
-### Routes
-### Server
 
 
 ## Tecnologías
