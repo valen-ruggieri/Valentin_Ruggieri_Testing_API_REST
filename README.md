@@ -1,4 +1,4 @@
-# Valentin_Ruggieri_Proyecto_Final_3
+# Proyecto Final 3 entrega y Arquitectura por capas
 
 ## Deploy
 
@@ -40,6 +40,14 @@ Redireccionara a la cuenta del perfil con su informacion
 - Los esquemas nos brindaran mas seguridad a la hora de enviar los datos como asi tambien tendremos las coookies firmadas
 - Mediante passport manejaremos los inicios y registros del usuario brinndando una serie de condiconales que permitira evitar errores a la hora de utilizar la app web
 - Utilizando bcrypt podremos enviar una contrasena encriptada hacia la base de datos cuando se registra un usuario, de esta manera aumentado la seguridad y minimizando los riesgos, las clave encriptadas luego mediante metodos sera comparada a la hora de iniciar sesion para poder evaluar si pertenece al usuario anteriormente registrado
+
+
+## Arquitectura pot capas
+### Database
+### Controllers
+### Services
+### Routes
+### Server
 
 
 ## Tecnologías
