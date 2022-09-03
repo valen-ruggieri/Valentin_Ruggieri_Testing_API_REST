@@ -46,14 +46,14 @@ class MongoDBClass {
       const one = await this.collection.create(doc);
       return one
     } catch (error) {
-      throw new Error(error);
+      logger.error(err);
     }
   }
   async deleteById(id) {
     try {
       const one = await this.collection.findById(id).deleteOne();
     } catch (error) {
-      throw new Error(error);
+      logger.error(err);
     }
   }
 

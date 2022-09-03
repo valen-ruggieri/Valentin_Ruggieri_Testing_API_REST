@@ -15,7 +15,6 @@ const productSchema = yup.object({
 
 const validationProduct = (method) => async (req, res, next) => {
   const body = req.body;
-  logger.info(body);
   try {
     await productSchema.validate(body);
     logger.info("Add to product success ✔");

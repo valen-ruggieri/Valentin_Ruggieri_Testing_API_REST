@@ -1,44 +1,17 @@
 require("dotenv").config();
 const express = require("express");
+const {getLogIn,getLogInError,postLogIn,postLogInError} = require("../../controllers/controllerLogin");
 const routerLogIn = express.Router();
-const passport = require("passport");
 const userschemaValidation = require("../../models/userSchemaValidation");
 const userValidation = require("../../utils/middlewares/authValidation");
+const validation = userValidation(userschemaValidation)
 
-routerLogIn.get("/loginerror", (req, res) => {
-  res.render("logIn.ejs", {
-    message: "el usuario que intentas crear ya existe, prueba iniciando sesion",
-    error: true,
-  });
-});
+routerLogIn.get("/login", getLogIn);
 
-routerLogIn.get("/login", (req, res) => {
-  res.render("logIn.ejs", { message: "Puedes registrarte aquí", error: false });
-});
+routerLogIn.post("/login", validation , postLogIn);
 
-routerLogIn.post(
-  "/login",
-  userValidation(userschemaValidation),
-  passport.authenticate("signUp", {
-    successRedirect: "/store",
-    successMessage: "registro exitoso",
-    failureRedirect: "/loginerror",
-    failureMessage: "fallo en el registro",
-    passReqToCallback: true,
-  })
-  
-);
+routerLogIn.get("/loginerror", getLogInError);
 
-routerLogIn.post(
-  "/loginerror",
-  userValidation(userschemaValidation),
-  passport.authenticate("signUp", {
-    successRedirect: "/store",
-    successMessage: "registro exitoso",
-    failureRedirect: "/loginerror",
-    failureMessage: "fallo en el registro",
-    passReqToCallback: true,
-  })
-);
+routerLogIn.post( "/loginerror",validation,postLogInError);
 
 module.exports = routerLogIn;

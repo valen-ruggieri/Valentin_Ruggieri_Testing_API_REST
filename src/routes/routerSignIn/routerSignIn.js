@@ -1,31 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const routerSignIn = express.Router();
-const passport = require("passport");
+const {
+  getSignIn,
+  getSignInError,
+  postSignIn,
+} = require("../../controllers/controllerSignIn");
 
-routerSignIn.get("/signinerror", (req, res) => {
-  res.render("signIn.ejs", {
-    message: "el usuario que buscas no existe, prueba registrandote",
-    error: true,
-  });
-});
+routerSignIn.get("/signinerror", getSignInError);
 
-routerSignIn.get("/signin", (req, res) => {
-  res.render("signIn.ejs", {
-    message: "Puedes iniciar sesión aquí",
-    error: false,
-  });
-});
+routerSignIn.get("/signin", getSignIn);
 
-routerSignIn.post(
-  "/signin",
-  passport.authenticate("signIn", {
-    successRedirect: "/store",
-    successMessage: "registro exitoso",
-    failureRedirect: "/signinerror",
-    failureMessage: "fallo en el inicio de sesion",
-    passReqToCallback: true,
-  })
-);
+routerSignIn.post("/signin", postSignIn);
 
 module.exports = routerSignIn;

@@ -1,7 +1,6 @@
 const express = require("express");
+const getError = require("../../controllers/controllerError");
 const routerError = express.Router();
 
-routerError.get("/errorExpiredSession", async (req, res) => {
-  res.render("errorExpiredSession.ejs");
-});
+routerError.get("/errorExpiredSession", getError );
 module.exports = routerError;
