@@ -1,8 +1,8 @@
-# Proyecto Final 3 entrega y Arquitectura por capas
+# Desafio API mejorada
 
 ## Deploy
 
-https://shopbasic.herokuapp.com/
+
 
 
 ## Inicio
@@ -10,6 +10,13 @@ En este desaio realizaremos la tercer entrega del proyecto final en el cual tend
 profiling con artillery, loggers con log4js, activacion de cluster y deploy en heroku.
 Ademas tambien conjunto al desafio de arquitectura por capas el cual sera realizado en este mismo, refactorizaremos todo el codigo y dividiremos en capas
 para mejorar el entendimiento del mismo y cada parte funcional.
+Ademas utilizaremos DTOs para transportar la informacion y modificarla al realizar las consultas con la base de datos de MongoDB.
+
+## DTOs
+- Carts
+- Products
+- Sessions
+- Users
 
 ## Arquitectura por capas
 - Database
