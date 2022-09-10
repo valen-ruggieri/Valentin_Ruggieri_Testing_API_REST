@@ -7,7 +7,33 @@ Ademas tambien conjunto al desafio de arquitectura por capas el cual sera realiz
 para mejorar el entendimiento del mismo y cada parte funcional.
 Ademas utilizaremos DTOs para transportar la informacion y modificarla al realizar las consultas con la base de datos de MongoDB.
 
+## DAOs
+La utlizamos para heredar en cada tipo de clase todas las funciones nativas de la base de datos que sea seleccionada, tiene relacion directa con los methodos que se utilizan normalmente en para conectar directamente con la base de datos.
+La aplicamos en:
+- Carts
+- Products
+- Sessions
+- Users
+
+## Patron Factory
+Se encarga de la creacion de las classes para cada tipo y dependiendo de una variable de entornoi para utilizar una u otra base de datos, por defecto se crea en mongoDB.
+La aplicamos en:
+- Carts
+- Products
+- Sessions
+- Users
+
+## Patron Repository
+Es donde guardamos las funciones para consulktar directamente con la base de datos, una capa antes de la de persistencia.
+Lo aplicamos en:
+- Carts
+- Products
+- Sessions
+- Users
+
 ## DTOs
+Determina la composicion de los datos para cada tipo de esquema.
+Lo aplicamos en:
 - Carts
 - Products
 - Sessions
