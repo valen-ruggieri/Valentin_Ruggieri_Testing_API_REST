@@ -1,10 +1,5 @@
 # Desafio API mejorada
 
-## Deploy
-
-
-
-
 ## Inicio
 En este desaio realizaremos la tercer entrega del proyecto final en el cual tendremos registros mediante passport, mensajeria con nodemailer y twilio, 
 profiling con artillery, loggers con log4js, activacion de cluster y deploy en heroku.
