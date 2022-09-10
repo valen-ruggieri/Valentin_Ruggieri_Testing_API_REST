@@ -1,10 +1,11 @@
-const { userDao, sessionDao } = require("../../DAOs/swicht");
+const { deleteSessionAll } = require("../../Repository/sessionsRepository");
+const { deleteUserById } = require("../../Repository/usersRepository");
 const logger = require("../../utils/loggers/loggers");
 
 async function redirectToHome(res) {
   try {
     setTimeout(async () => {
-      await sessionDao.deleteAll();
+      await deleteSessionAll();
       logger.info("las sesiones fueron eliminadas correctamente");
       res.redirect("/");
     }, 800);
@@ -15,7 +16,7 @@ async function redirectToHome(res) {
 
 async function deleteUser(req) {
   try {
-    await userDao.deleteById(req.session.passport.user);
+    await deleteUserById(req.session.passport.user);
   } catch (error) {
     logger.error(error);
   }
@@ -23,13 +24,13 @@ async function deleteUser(req) {
 
 async function deleteSession() {
   try {
-    await sessionDao.deleteAll();
+    await deleteSessionAll();
   } catch (error) {
     logger.error(error);
   }
 }
 
-async function deleteAccount(req,res) {
+async function deleteAccount(req, res) {
   try {
     await deleteSession();
     await deleteUser(req);

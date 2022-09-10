@@ -1,9 +1,16 @@
-const { userDao, productsDao } = require("../../DAOs/swicht");
+const {
+  getAllProducts,
+  createProduct,
+  updateProductById,
+  deleteProductById,
+} = require("../../Repository/productsRepository");
+const { searchUserById } = require("../../Repository/usersRepository");
+
 const productoConfig = require("../../services/servicesProducts");
 
 const getStore = async (req, res) => {
-  const sessionData = await userDao.getById(req.session.passport.user);
-  const productos = await productsDao.getAll();
+  const sessionData = await searchUserById(req.session.passport.user);
+  const productos = await getAllProducts();
   res.render("store.ejs", { sessionData, productos });
 };
 
@@ -17,20 +24,20 @@ const getAddForm = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   const id = req.params.id;
-  await productsDao.deleteById(id);
+  await deleteProductById(id);
   res.redirect("/store");
 };
 
 const postAddProduct = async (req, res) => {
-  const product = productoConfig(req)
-  await productsDao.create({ ...product });
+  const product = productoConfig(req);
+  await createProduct(product);
   res.redirect("/store");
 };
 
 const postUpdateProduct = async (req, res) => {
   const id = req.params.id;
-  const product = productoConfig(req)
-  await productsDao.updateById(id, { ...product });
+  const product = productoConfig(req);
+  await updateProductById(id, product);
   res.redirect("/store");
 };
 

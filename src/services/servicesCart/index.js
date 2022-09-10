@@ -1,10 +1,11 @@
-const { userDao, cartsDao, productsDao } = require("../../DAOs/swicht");
+const { searchCartById, updateCartById } = require("../../Repository/cartsRepository");
+const { searchUserById } = require("../../Repository/usersRepository");
 const logger = require("../../utils/loggers/loggers");
 
 async function searchProducts(id) {
   try {
-    const { cartId } = await userDao.getById(id);
-    const cartInBase = await cartsDao.getById(cartId);
+    const { cartId } = await searchUserById(id);
+    const cartInBase = await searchCartById(cartId);
     const products = cartInBase.products;
     return products ? products : [];
   } catch (error) {
@@ -14,8 +15,8 @@ async function searchProducts(id) {
 
 async function searchCart(id) {
   try {
-    const { cartId } = await userDao.getById(id);
-    const cartInBase = await cartsDao.getById(cartId);
+    const { cartId } = await searchUserById(id);
+    const cartInBase = await searchCartById(cartId);
     return cartInBase;
   } catch (error) {
     logger.error(error);
@@ -65,8 +66,8 @@ async function reloadCart(precioTotal, products, cart) {
     timestamp: timestamp,
     products: products,
   };
-  console.log(data, cart);
-  await cartsDao.updateById(cart._id, { ...data });
+
+  await updateCartById(cart._id, { ...data });
 }
 
 async function deleteAllCart(cart) {
@@ -77,7 +78,7 @@ async function deleteAllCart(cart) {
     timestamp: timestamp,
     products: [],
   };
-  await cartsDao.updateById(cart._id, { ...data });
+  await updateCartById(cart._id, { ...data });
 }
 
 module.exports = {

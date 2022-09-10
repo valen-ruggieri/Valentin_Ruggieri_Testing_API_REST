@@ -1,6 +1,14 @@
 require("dotenv").config();
 const passport = require("passport");
-const { userDao, cartsDao } = require("../../DAOs/swicht");
+const { createCart } = require("../../Repository/cartsRepository");
+const {
+  createUser,
+  searchUserById,
+  searchUserByEmail,
+  encryptPassword,
+  comparePassword,
+} = require("../../Repository/usersRepository");
+
 const { sendMailWelcome } = require("../nodeMailer/nodeMailer");
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -9,7 +17,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await userDao.getById(id);
+  const user = await searchUserById(id);
   done(null, user);
 });
 
@@ -22,29 +30,29 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
-      const exists = await userDao.getByUser({ email });
+      const exists = await searchUserByEmail(email);
 
       if (!exists) {
         const cartInit = {
           precioTotal: 0,
           products: [],
-        }; 
-        const cart = await cartsDao.create({...cartInit})
-        const cartUID = cart._id
+        };
+        const cart = await createCart(cartInit);
+        const cartUID = cart._id;
         const { name, userType, address, age, phone } = req.body;
         const image = req.file.filename;
-        const userSignIn = await userDao.create({
+        const userSignIn = await createUser({
           user: name,
           email: email,
-          password: userDao.encryptPassword(password),
+          password: await encryptPassword(password),
           userType: userType,
           address: address,
           age: age,
           phone: phone,
           image: image,
-          cartId:cartUID
-        })
-      
+          cartId: cartUID,
+        });
+
         sendMailWelcome(name, email, userType, address, age, phone);
         return done(null, userSignIn);
       }
@@ -64,11 +72,11 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
-      const user = await userDao.getByUser({ email });
+      const user = await searchUserByEmail(email);
       if (!user) {
         return done(null, false);
       }
-      if (!(await userDao.comparePassword(password, user.password))) {
+      if (!comparePassword(password, user.password)) {
         return done(null, false);
       }
 

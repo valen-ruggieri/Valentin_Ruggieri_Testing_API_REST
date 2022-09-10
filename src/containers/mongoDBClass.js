@@ -19,7 +19,7 @@ class MongoDBClass {
       const one = await this.collection.findById(id).lean();
       return one;
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
 
@@ -29,7 +29,7 @@ class MongoDBClass {
      
       return one[0];
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
 
@@ -38,7 +38,7 @@ class MongoDBClass {
       const all = await this.collection.find().count();
       return all;
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
   async create(doc) {
@@ -46,14 +46,14 @@ class MongoDBClass {
       const one = await this.collection.create(doc);
       return one
     } catch (error) {
-      logger.error(err);
+      logger.error(error);
     }
   }
   async deleteById(id) {
     try {
       const one = await this.collection.findById(id).deleteOne();
     } catch (error) {
-      logger.error(err);
+      logger.error(error);
     }
   }
 
@@ -61,14 +61,14 @@ class MongoDBClass {
     try {
       const all = await this.collection.deleteMany();
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
   async updateById(id, doc) {
     try {
       const one = await this.collection.findByIdAndUpdate(id, doc);
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
   async getByEmail(data){
@@ -77,7 +77,7 @@ class MongoDBClass {
      
       return one[0];
     } catch (error) {
-       logger.error(err);
+       logger.error(error);
     }
   }
 }

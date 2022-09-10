@@ -1,4 +1,3 @@
-const { userDao, cartsDao, productsDao } = require("../../DAOs/swicht");
 const sendToWsp = require("../../utils/twilio/twilio");
 const { sendMailTicket } = require("../../utils/nodeMailer/nodeMailer");
 const {
@@ -11,9 +10,11 @@ const {
   deleteInCart,
   deleteAllCart,
 } = require("../../services/servicesCart");
+const { searchProductById } = require("../../Repository/productsRepository");
+const { searchUserById } = require("../../Repository/usersRepository");
 
 const getCart = async (req, res) => {
-  const sessionData = await userDao.getById(req.session.passport.user);
+  const sessionData = await searchUserById(req.session.passport.user);
   const cart = await searchCart(req.session.passport.user);
   res.render("cart.ejs", {
     sessionData,
@@ -24,7 +25,7 @@ const getCart = async (req, res) => {
 
 const addproduct = async (req, res) => {
   const id = req.params.id;
-  const product = await productsDao.getById(id);
+  const product = await searchProductById(id);
   const cartInBase = await searchCart(req.session.passport.user);
   const products = await searchProducts(req.session.passport.user);
   const index = findIndexProduct(products, product);
@@ -36,7 +37,7 @@ const addproduct = async (req, res) => {
 
 const deleteproduct = async (req, res) => {
   const id = req.params.id;
-  const product = await productsDao.getById(id);
+  const product = await searchProductById(id);
   const cartInBase = await searchCart(req.session.passport.user);
   const products = await searchProducts(req.session.passport.user);
   const index = findIndexProduct(products, product);
@@ -53,7 +54,7 @@ const deleteAll = async (req, res) => {
 };
 
 const buyAll = async (req, res) => {
-  const { email, user, phone } = await userDao.getById(
+  const { email, user, phone } = await searchUserById(
     req.session.passport.user
   );
   const { products, precioTotal } = await searchCart(req.session.passport.user);
