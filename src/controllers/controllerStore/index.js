@@ -9,9 +9,15 @@ const { searchUserById } = require("../../Repository/usersRepository");
 const productoConfig = require("../../services/servicesProducts");
 
 const getStore = async (req, res) => {
-  const sessionData = await searchUserById(req.session.passport.user);
-  const productos = await getAllProducts();
-  res.render("store.ejs", { sessionData, productos });
+  if (req.session.passport) {
+    const sessionData = await searchUserById(req.session.passport.user);
+    const productos = await getAllProducts();
+
+    res.render("store.ejs", { sessionData, productos });
+  } else {
+    const productos = await getAllProducts();
+    res.json(productos);
+  }
 };
 
 const getUpdateForm = async (req, res) => {

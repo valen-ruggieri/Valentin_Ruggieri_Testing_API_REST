@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/valen-ruggieri/Valentin_Ruggieri_Cookies_And_Session#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cluster": "^0.7.7",
     "connect-mongo": "^4.6.0",

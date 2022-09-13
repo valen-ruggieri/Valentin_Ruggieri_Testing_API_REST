@@ -2,7 +2,7 @@
 function authPermissions(req, res, next) {
   
   if (
-    req.isAuthenticated()) {
+    req.session) {
     return next();
   } else {
     res.redirect("/errorExpiredSession");
