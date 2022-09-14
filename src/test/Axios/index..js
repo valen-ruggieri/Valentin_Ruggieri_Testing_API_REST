@@ -9,37 +9,34 @@ const getProducts = async () => {
   }
 };
 
-const postProduct = async () => {
+const postProduct = async (data) => {
   try {
     await axios.post("http://localhost:8080/store/addproduct", {
-      titulo: "pelota",
-      precio: "566",
-      descripcion: "es una pelota",
-      codigo: "ple455",
+      titulo: data.titulo,
+      precio: data.precio,
+      descripcion: data.descripcion,
+      codigo: data.codigo,
     });
   } catch (error) {
     console.log(error);
   }
 };
-const updateProduct = async () => {
+const updateProduct = async (id, data) => {
   try {
-    await axios.post(
-      "http://localhost:8080/store/updateproduct/6320ea0e1559b15ddfdcb54c",
-      {
-        titulo: "reloj",
-        precio: "1200",
-        descripcion: "es un reloj",
-        codigo: "rel755",
-      }
-    );
+    await axios.post(`http://localhost:8080/store/updateproduct/6${id}`, {
+      titulo: data.titulo,
+      precio: data.precio,
+      descripcion: data.descripcion,
+      codigo: data.codigo,
+    });
   } catch (error) {
     console.log(error);
   }
 };
-const deleteProduct = async () => {
+const deleteProduct = async (id) => {
   try {
     const product = await axios.get(
-      "http://localhost:8080/store/deleteproduct/6320ea0e1559b15ddfdcb54c"
+      `http://localhost:8080/store/deleteproduct/${id}`
     );
   } catch (error) {
     console.log(error);
