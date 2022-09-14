@@ -21,4 +21,28 @@ const postProduct = async () => {
     console.log(error);
   }
 };
-module.exports = { getProducts, postProduct };
+const updateProduct = async () => {
+  try {
+    await axios.post(
+      "http://localhost:8080/store/updateproduct/6320ea0e1559b15ddfdcb54c",
+      {
+        titulo: "reloj",
+        precio: "1200",
+        descripcion: "es un reloj",
+        codigo: "rel755",
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+const deleteProduct = async () => {
+  try {
+    const product = await axios.get(
+      "http://localhost:8080/store/deleteproduct/6320ea0e1559b15ddfdcb54c"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+module.exports = { getProducts, postProduct, updateProduct, deleteProduct };

@@ -1,6 +1,6 @@
 require("dotenv").config();
 const cluster = require("cluster");
-const { getProducts, postProduct } = require("./test/Axios/index.test");
+const { getProducts, postProduct, updateProduct, deleteProduct } = require("./test/Axios/index.test");
 const logger = require("./utils/loggers/loggers");
 const numCPUs = require("os").cpus().length;
 
@@ -24,6 +24,8 @@ if (cluster.isMaster && process.env.CLUSTER === "on") {
   // TEST CON AXIOS
   //getProducts();
   //postProduct();
+  //updateProduct()
+  //deleteProduct()
   server.listen(PORT, () => {
     logger.info(`Servidor listo en el puerto ${PORT} ✅`);
   });

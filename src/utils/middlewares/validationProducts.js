@@ -17,7 +17,7 @@ const validationProduct = (method) => async (req, res, next) => {
   const body = req.body;
   try {
     await productSchema.validate(body);
-    logger.info("Add to product success ✔");
+    logger.info(`${method} success ✔`);
     next();
   } catch (error) {
     const { id } = req.params;

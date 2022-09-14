@@ -35,7 +35,7 @@ const searchProductById = async (id) => {
 
 const updateProductById = async (id, data) => {
   try {
-    productsDao.updateById(id, { ...data });
+    await productsDao.updateById(id, { ...data });
   } catch (error) {
     logger.error(error);
   }
